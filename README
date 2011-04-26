@@ -56,16 +56,10 @@
 	Countries are not yet linked to the continents
 
 	About 800 of the divisions are missing a lat/lng pair
-
-	Th
-
-== Countries and Divisions ==
-
-	Contains 4888 countries and divisions, 4078 of these have a lat/lng pair
-	as reverse geocoded from Google maps
 	
-	There are some discrepancies in the coordinates; we are looking to start
-	a project to crowd-source and fix these issues
+	In order to tackle this project I'm looking to do one of 2 things:
+		Start a project to crowd-source these fixes
+		Sit down and do it myself
 
 == NOTES ABOUT THE EARTH AND IT'S CONTINENTS ==
 
