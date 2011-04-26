@@ -1,0 +1,51 @@
+How to work with the git repository of iso-codes
+================================================
+
+First of all, if you need to read the official git documentation for
+more information regarding any of the commands listed here, you can
+find it online at <http://git.or.cz/#documentation>. I've added
+the equivalent svn command as well, where applicable.
+
+
+A. PREPARATION
+==============
+
+Clone the repository with write access
+--------------------------------------
+(svn co svn+ssh://<user>@svn.debian.org/svn/pkg-isocodes/trunk/iso-codes)
+$ git clone ssh://<user>@git.debian.org/git/iso-codes/iso-codes.git
+$ cd iso-codes
+
+Create your debian branch
+-------------------------
+There's no equivalent in svn, because we did not have a dedicated branch
+for Debian within subversion.
+$ git branch debian --track origin/debian
+
+Switch back to master branch for updates
+----------------------------------------
+If you've committed files for Debian, you should ensure that you're always
+working on the master branch when doing "upstream" work. That work will
+be merged into the Debian branch upon uploads to Debian.
+$ git checkout master
+
+Tell git who you are
+--------------------
+This is necessary for proper author information in the repository.
+$ git config user.name "Your name"
+$ git config user.email mail@example.org
+
+
+B. NORMAL WORK
+==============
+
+Work and commit cycle
+---------------------
+Make sure you have the latest changes in your working tree.
+(svn up)
+$ git pull
+Edit files and commit
+(svn ci -m "changelog message")
+$ git commit -a -m "changelog message"
+Push your changes to alioth, so others can get them
+$ git push

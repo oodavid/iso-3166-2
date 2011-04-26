@@ -1,0 +1,77 @@
+How to release a new version of iso-codes
+=========================================
+
+Make sure you have all the latest updates and no stale files
+in your working copy. The best way to achieve this is to get
+a fresh checkout from the git server.
+$ mkdir release
+$ cd release
+$ git clone ssh://<user>@git.debian.org/git/iso-codes/iso-codes.git
+
+Update the version number in configure.ac, also update the ChangeLog
+with the current release number, your name, and the date.
+Commit the changes.
+$ git commit -a -m "Prepare next release"
+
+Update all automatically generated files (configure, Makefiles, etc.)
+and commit.
+$ autoreconf --install --symlink
+$ git commit -a -m "Update automatically generated files"
+
+Create the Makefiles.
+$ ./configure
+
+Update all .po files (including the automatic update of the
+sr@latin locale) and commit.
+$ make update-po
+$ git commit -a -m "Refresh .po files"
+
+Create an annotated and GPG-signed tag for the next release.
+Please respect the following release numbering scheme:
+
+- Major version: use this for data organisation changes (like the
+  switch to XML, or incompatible changes in the XML files like the
+  removal of a field)
+- Level 1 minor version: use this when one of the ISO lists is updated
+  or for compatible changes to the XML files, like the addition of
+  a field
+- Level 2 minor version: use this when only translations are updated.
+  If you increment the Level 1 minor version, omit the second level
+  minor version. Example: 1.2.5 -> 1.3, not 1.3.0
+
+$ git tag -s -m "iso-codes MAJOR.MINOR1.MINOR2" iso-codes/MAJOR.MINOR1.MINOR2
+
+Use the Makefile target "release" for creating checked tarballs.
+$ make release
+
+Use the Makefile target "sign-release" to sign the tarballs.
+$ make sign-release
+
+Upload the tarballs and your signatures to the FTP area of Alioth.
+$ ALIOTH_USERNAME=<yourname> make upload
+
+Please do not remove previous versions from the FTP area of Alioth,
+because they might still be needed by some distributions.
+
+You can now clean up.
+$ cd ..
+$ rm -rf release/
+
+
+How to release a new Debian revision
+====================================
+
+Check out the debian branch of iso-codes and merge the master branch.
+$ git checkout debian
+$ git merge master
+
+Copy the ChangeLog entries which fix a bug in the Debian BTS to
+debian/changelog and commit.
+$ git commit debian/changelog
+
+When you're ready to upload, create an annotated and GPG-signed tag
+for the release.
+$ git tag -s -m "Debian release 3.5.1-1" debian/3.5.1-1
+
+Go back to the master branch.
+$ git checkout master

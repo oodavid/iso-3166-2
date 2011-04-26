@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Address tool</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.json-2.2.min.js"></script>
+	<script type="text/javascript" src="iso.js"></script>
+</head>
+<body>
+	<div style="width: 600px; height: 480px;">
+		<div id="map_canvas" style="width: 600px; height: 480px;"></div>
+	</div>
+	<h1>ISO 3166:2 - awesome source</h1>
+	<p>This little widget is built to take locality data that is distributed with debian and convert it into JSON objects for inputting into MongoDB (or any other storage system), there a few steps to take to ensure that everything works tickety-boo:</p>
+	<ol>
+		<li>Get the most up-to-date <a href="http://git.debian.org/?p=iso-codes/iso-codes.git">iso-codes from debian</a> (they seem to be the most actively developed set of data)</li>
+		<li>Compare the data in /iso-codes/iso_3166_2/iso_3166_2.xml and make sure it lines up with the <a href="http://www.iso.org/iso/country_codes/updates_on_iso_3166.htm">iso newsletters</a></li>
+		<li>All good? Copy the entire /iso-codes directory into the directory containing this html file</li>
+		<li>Click the below button and check your console</li>
+		<li>As we're geocoding the locations through GMaps (with a rate-limit), the results will appear on the map above :-)</li>
+	</ol>
+	<button onclick="iso.load();">GHOOOOOOOOOOOOOOOOOOOOOOOO!</button>
+	<br /><br /><br /><br /><br />
+</body>
+</html>
