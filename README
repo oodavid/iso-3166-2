@@ -1,0 +1,98 @@
+==============
+  ISO 3166-2
+==============
+
+	The aim of this project is to create a structured data set to be used as a
+	foundation for the grouping of geolocational data.
+
+	Currently the set is based on ISO 3166-2 with a few notable additions that
+	give us some extra structure:
+
+		1 "planet" division (Earth)
+		7 "continent" divisions
+			- plus -
+		4888 nodes from the ISO standard (from country down to parishes)
+
+== FORMAT ==
+
+	The data object is indexed on the CODE value and contains
+		code		ISO 3166-2 code (UNIQUE)
+		name		Name of the division
+		division	Type of division (planet, continent, country etc)
+		parent		The code of the parent division (OPTIONAL)
+		lat & lng	The latitude and longitude of the division (OPTIONAL)
+
+	Eventually the data set will only have a single node that is missing a
+	parent and lat/lng pair (the top-division, Earth), for now the data set is
+	incomplete but updates to this data-set should easily be integrated to any
+	system that uses it with trivial parsing.
+
+== SNIPPET ==
+
+	var iso_3166_2 = {
+		// Planet Earth
+		"EARTH": {"code": "EARTH", "name": "Earth", "division": "planet"},
+		// The 7 continents
+		"ASI": {"code": "ASI", "name": "Asia",          "division": "continent", "parent": "EARTH"},
+		"AFR": {"code": "AFR", "name": "Africa",        "division": "continent", "parent": "EARTH"},
+		"ANT": {"code": "ANT", "name": "Antarctica",    "division": "continent", "parent": "EARTH"},
+		"AUS": {"code": "AUS", "name": "Australia",     "division": "continent", "parent": "EARTH"},
+		"EUR": {"code": "EUR", "name": "Europe",        "division": "continent", "parent": "EARTH"},
+		"NAM": {"code": "NAM", "name": "North America", "division": "continent", "parent": "EARTH"},
+		"SAM": {"code": "SAM", "name": "South America", "division": "continent", "parent": "EARTH"},
+		// The Countries and Divisions
+		"AD":    {"code": "AD",    "name": "Andorra",             "division": "country",                "lat": 42.5075314, "lng": 1.521815599999968},
+		"AD-07": {"code": "AD-07", "name": "Andorra la Vella",    "division": "parish", "parent": "AD", "lat": 42.5075314, "lng": 1.521815599999968},
+		"AD-02": {"code": "AD-02", "name": "Canillo",             "division": "parish", "parent": "AD", "lat": 42.5660922, "lng": 1.5967008999999734},
+		"AD-03": {"code": "AD-03", "name": "Encamp",              "division": "parish", "parent": "AD", "lat": 42.5363306, "lng": 1.5831104999999752},
+		"AD-08": {"code": "AD-08", "name": "Escaldes-Engordany",  "division": "parish", "parent": "AD", "lat": 42.5088914, "lng": 1.542137499999967},
+		"AD-04": {"code": "AD-04", "name": "La Massana",          "division": "parish", "parent": "AD", "lat": 42.5449448, "lng": 1.5153695000000198},
+		"AD-05": {"code": "AD-05", "name": "Ordino",              "division": "parish", "parent": "AD", "lat": 42.5554593, "lng": 1.533297800000014},
+		"AD-06": {"code": "AD-06", "name": "Sant Julià de Lòria", "division": "parish", "parent": "AD", "lat": 42.4648686, "lng": 1.4911495999999715}
+	};
+
+== KNOWN ISSUES ==
+
+	Countries are not yet linked to the continents
+
+	About 800 of the divisions are missing a lat/lng pair
+
+	Th
+
+== Countries and Divisions ==
+
+	Contains 4888 countries and divisions, 4078 of these have a lat/lng pair
+	as reverse geocoded from Google maps
+	
+	There are some discrepancies in the coordinates; we are looking to start
+	a project to crowd-source and fix these issues
+
+== NOTES ABOUT THE EARTH AND IT'S CONTINENTS ==
+
+	The continents have been given 3-letter codes to ensure that there are no
+	collisions with the ISO 3166-2 standard
+
+	The earth uses a 5-letter code (EARTH) for the same reason
+	
+	The continents are defined as:
+		ASI	Asia
+		AFR	Africa
+		NAM	North America
+		SAM	South America
+		ANT	Antarctica
+		EUR	Europe
+		AUS	Australia
+
+== CREDITS ==
+
+   david@happie.st
+
+    ,/         \,
+   ((__,-"""-,__))
+    `--)~   ~(--`
+   .-'(       )`-,
+   `~~`d\   /b`~~`
+       \     /
+       (6___6)
+        `YYY`
+
